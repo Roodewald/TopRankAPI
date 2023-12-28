@@ -2,8 +2,8 @@ services:
   asp_net:
     container_name: aspnet_web
     build:
-      context: .
-      dockerfile: Docker/asp_net.dockerfile
+      context: ../
+      dockerfile: ./Docker/asp_net.dockerfile
     ports:
       - "5230:5230"  # Проброс портов хоста на порт контейнера ASP.NET
     depends_on:
