@@ -1,0 +1,25 @@
+services:
+  asp_net:
+    container_name: aspnet_web
+    build:
+      context: .
+      dockerfile: Docker/asp_net.dockerfile
+    ports:
+      - "5230:5230"  # Проброс портов хоста на порт контейнера ASP.NET
+    depends_on:
+      - db  # Зависимость от сервиса базы данных
+
+  db:
+    image: postgres:latest
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: verter
+    ports:
+      - "5423:5432"  # Проброс портов хоста на порт контейнера PostgreSQL
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Монтируем том для хранения данных PostgreSQL
+
+volumes:
+  postgres_data: # Определяем том для хранения данных PostgreSQL
